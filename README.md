@@ -6,7 +6,7 @@ Qichao Wang <Qichao.Wang@nrel.gov>
 <br>
 Nicholas Accurso <Nicholas.Accurso@nrel.gov>
 ### Publication
-This work is intended for publication in IEEE Transactions on Intelligent Transportation Systems. This software is identified under NREL Software Record Number SWR-24-54. 
+This software is identified under NREL Software Record Number SWR-24-54. 
 
 ### Purpose
 To provide a configurable, scalable C-V2X Mode 4 simulator intended for synchronous co-simulation with the Aimsun NEXT vehicle traffic simulator. 
