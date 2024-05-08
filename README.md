@@ -9,20 +9,23 @@ Nicholas Accurso <Nicholas.Accurso@nrel.gov>
 This software is identified under NREL Software Record Number SWR-24-54. 
 
 ### Purpose
-To provide a configurable, scalable C-V2X Mode 4 simulator intended for synchronous co-simulation with the Aimsun NEXT vehicle traffic simulator. 
-The simulation federate configuration parameters are vehicle scenario area, number of vehicles, vehicle coordinates, maximum communication range between nodes, and network protocol configuration. For co-simulation, the input will also include the IP address and port of the associated HELICS broker. The outputs include: number of ns-3 instances required to simulate the networking area, network-level packet reception ratio and drop rate, and packet-level network performance, including message receptions, message drops, and latency. In each synchronous simulation step, the network simulation is designed to receive node ID, coordinates, and relevant transmission triggers from the vehicle simulator, and will return the associated transmission/reception results to the traffic simulator. The C-V2X protocol stack integrated with this framework can be found at https://github.com/FabianEckermann/ns-3_c-v2x.  
+To provide a configurable, scalable C-V2X Mode 4 simulator intended for synchronous co-simulation with the Aimsun NEXT vehicle traffic simulator or any other microscopic traffic simulators. 
+The simulation federate configuration parameters are vehicle scenario area, number of vehicles, vehicle coordinates, maximum communication range between nodes, and network protocol configuration. For co-simulation, the input will also include the IP address and port of the associated HELICS broker. The outputs include: number of ns-3 instances required to simulate the networking area, network-level packet reception ratio and drop rate, and packet-level network performance, including message receptions, message drops, and latency. In each synchronous simulation step, the network simulation is designed to receive node ID, coordinates, and transmission triggers from the vehicle simulator, and will return the associated transmission/reception results to the traffic simulator. The C-V2X protocol stack integrated with this framework can be found at https://github.com/FabianEckermann/ns-3_c-v2x.  
 
 
 ### This repo contains the following items:
 - Core code for the software
-	* For synchronous co-simulation: workspace_code/ns3-starter.py
-	* For standalone operation (network simulation only): workspace_code/solo-ns3-starter.py
+	* Network simulation main program: /scratch/v2x\_sim/v2x\_sim.cc 
+	* For synchronous co-simulation: ns3-starter.py
+	* For standalone operation (network simulation only): solo-ns3-starter.py
 - Input data
 	* For synchronous co-simulation, input is provided by Aimsun NEXT V2X SDK.
-	* For co-simulation testing without independent vehicle simulation: workspace_code/aimsun-proxy.py
-	* For standalone operation, simulation configuration is input via command line: workspace_code/solo-ns3-starter.py
+	* For co-simulation testing without independent vehicle simulation: aimsun-proxy.py
+	* For standalone operation, simulation configuration is input via command line: solo-ns3-starter.py
+	
+The network simulation configuration and primary contributions of this project are contained within the directory /scratch/v2x_sim/. All other directories included in this repo are included with the ns-3 network simulator. 
 
-All network simulation parameters (i.e. channel allocation, TX power, V2X message set, etc.) and co-simulation default parameters (i.e. runtime, simulation time per step, number of vehicles, etc.) found in ~/cv2x-cosim/workspace_code/scratch/v2x_sim/v2x_sim.cc. The test program (aimsun-proxy.py)  replicates the data transfer expected from external vehicle simulation, including vehicle IDs, vehicle location data, and vehicle broadcast messages. Note that the test program does not simulate any vehicle traffic - the generated data points are placeholders designed to enable standalone execution of the network simulation framework.  
+All network simulation parameters (i.e. channel allocation, TX power, V2X message set, etc.) and co-simulation default parameters (i.e. runtime, simulation time per step, number of vehicles, etc.) found in ~/cv2x-cosim/scratch/v2x\_sim/v2x\_sim.cc. The test program (aimsun-proxy.py)  replicates the data transfer expected from external vehicle simulation, including vehicle IDs, vehicle location data, and vehicle broadcast messages. Note that the test program does not simulate any vehicle traffic - the generated data points are placeholders designed to enable standalone execution of the network simulation framework.  
 
 
 ## Installation instructions
@@ -32,7 +35,7 @@ This program requires both Python 2.7 and Python 3.10. The recommended configura
 ### 1. Clone this repo
 In terminal, type
 ``` bash
-git clone https://github.nrel.com/CDA/cv2x-cosim 
+git clone https://github.com/NREL/NS3-C-V2X-Cosimulation-Framework 
 ```
 ### 2. Build and configure
 ``` bash
@@ -88,6 +91,7 @@ python3 ns3-starter.py -r new
 The program will issue prompts for the IP address and port of the remote broker. 
 
 #### Third configuration: local execution
+NOTE: for local execution on HPC, all code will need to be executed on the same cluster. 
 To run the co-simulation locally, run the following command in a terminal window:
 ``` bash
 helics_broker -f 2  
