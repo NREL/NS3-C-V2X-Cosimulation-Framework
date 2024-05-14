@@ -936,10 +936,10 @@ if (__name__ == "__main__"):
         time.sleep(2) 
 
         # start checking for data reported from ns-3 simulations 
-        reporting = [1 if (len(listener.retrieve_data()) == 0) else 0 for listener in listener_object_list]
-        # --> append 0 if listeners have collected data for this time step 
+        reporting = [0 if (len(listener.retrieve_data()) == 0) else 1 for listener in listener_object_list]
+        # --> append 1 if listeners have collected data for this time step 
 
-        while sum(reporting) != 0:
+        while sum(reporting) < num_inst:
             print(f"Waiting on {sum(reporting)} instances to report data...")
             # check timeout 
             if reporting_timeout == max_reporting_timeout: 
