@@ -696,8 +696,8 @@ ReceivePacket(Ptr<Socket> socket)
 
     // NetDeviceContainer::Iterator ncIt;
 
-    // double distance = sqrt(pow((posTx.x - posRx.x),2.0)+pow((posTx.x - posRx.y),2.0));
-    double distance = sqrt(pow((tagCopy.GetSenderLoc().x - posRx.x),2.0) + pow((tagCopy.GetSenderLoc().x - posRx.y),2.0));
+    // double distance = sqrt(pow((posTx.x - posRx.x),2.0)+pow((posTx.y - posRx.y),2.0));
+    double distance = sqrt(pow((tagCopy.GetSenderLoc().x - posRx.x),2.0) + pow((tagCopy.GetSenderLoc().y - posRx.y),2.0));
 
     if (distance > 0 && distance <= baseline) {         
         // uint32_t id = node->GetId();
